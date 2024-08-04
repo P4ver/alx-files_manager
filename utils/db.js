@@ -29,6 +29,16 @@ class DBClient {
   async nbFiles() {
     return this.db.collection('files').countDocuments();
   }
+
+  async getUserByEmailAndPassword(email, password) {
+    const db = this.client.db(this.database);
+    return db.collection('users').findOne({ email, password });
+}
+
+async getUserById(userId) {
+    const db = this.client.db(this.database);
+    return db.collection('users').findOne({ _id: new MongoClient.ObjectId(userId) });
+}  
 }
 
 const dbClient = new DBClient();
