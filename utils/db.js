@@ -5,7 +5,6 @@ const port = process.env.DB_PORT || 27017;
 const database = process.env.DB_DATABASE || 'files_manager';
 const url = `mongodb://${host}:${port}`;
 
-
 class DBClient {
   constructor() {
     MongoClient.connect(url, (err, client) => {
@@ -23,6 +22,7 @@ class DBClient {
   }
 
   async nbUsers() {
+    console.log(this.db)
     return this.db.collection('users').countDocuments();
   }
 
