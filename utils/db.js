@@ -41,6 +41,17 @@ class DBClient {
         const db = this.client.db(this.database);
         return db.collection('users').findOne({ _id: new MongoClient.ObjectId(userId) });
     }  
+
+    async getFileById(fileId) {
+      const db = this.client.db(this.database);
+      return db.collection('files').findOne({ _id: new ObjectId(fileId) });
+  }
+
+  async createFile(fileDocument) {
+      const db = this.client.db(this.database);
+      const result = await db.collection('files').insertOne(fileDocument);
+      return result.ops[0];
+  }
 }
 
 const dbClient = new DBClient();
