@@ -30,15 +30,17 @@ class DBClient {
     return this.db.collection('files').countDocuments();
   }
 
-  async getUserByEmailAndPassword(email, password) {
-    const db = this.client.db(this.database);
-    return db.collection('users').findOne({ email, password });
-}
+    async getUserByEmailAndPassword(email, password) {
+      console.log("===>",this.db)
 
-async getUserById(userId) {
-    const db = this.client.db(this.database);
-    return db.collection('users').findOne({ _id: new MongoClient.ObjectId(userId) });
-}  
+        const db = this.client.db(this.database);
+        return db.collection('users').findOne({ email, password });
+    }
+
+    async getUserById(userId) {
+        const db = this.client.db(this.database);
+        return db.collection('users').findOne({ _id: new MongoClient.ObjectId(userId) });
+    }  
 }
 
 const dbClient = new DBClient();

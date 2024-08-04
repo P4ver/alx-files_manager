@@ -31,7 +31,7 @@ const AuthController = {
             const token = uuidv4();
             const redisKey = `auth_${token}`;
             await redisClient.set(redisKey, user._id.toString(), 'EX', 86400); // 24 hours
-
+            console.log("===========>",redisKey)
             res.status(200).json({ token });
         } catch (error) {
             console.error('Error in getConnect:', error);
